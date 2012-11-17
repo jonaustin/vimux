@@ -19,6 +19,7 @@ command VimuxScrollDownInspect :call VimuxScrollDownInspect()
 command VimuxInterruptRunner :call VimuxInterruptRunner()
 command VimuxPromptCommand :call VimuxPromptCommand()
 command VimuxClearRunnerHistory :call VimuxClearRunnerHistory()
+command VimuxSwitchToRunner :call VimuxSwitchToRunner()
 
 " DEPRECATED
 command RunLastVimTmuxCommand :call VimuxRunLastCommand()
@@ -147,6 +148,10 @@ function VimuxInspectRunner()
   ruby CurrentTmuxSession.new.inspect_runner
 endfunction
 
+function VimuxSwitchToRunner()
+  ruby CurrentTmuxSession.new.switch_to_runner
+endfunction
+
 " deprecated!
 function InspectVimTmuxRunner()
   call VimuxInspectRunner()
@@ -224,8 +229,12 @@ class TmuxSession
     end
   end
 
-  def inspect_runner
+  def switch_to_runner
     _run("select-pane -t #{target(:pane => runner_pane)}")
+  end
+
+  def inspect_runner
+    switch_to_runner
     _run("copy-mode")
   end
 

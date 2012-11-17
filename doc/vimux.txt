@@ -61,7 +61,7 @@ process finishes and will see the output in the pane when it's finished.
 
 Furthermore there are several handy commands all starting with 'Vimux':
   - |VimuxRunCommand|
-  - |VimuxRunLastCommand| 
+  - |VimuxRunLastCommand|
   - |VimuxCloseRunner|
   - |VimuxClosePanes|
   - |VimuxCloseWindows|
@@ -69,6 +69,7 @@ Furthermore there are several handy commands all starting with 'Vimux':
   - |VimuxInterruptRunner|
   - |VimuxPromptCommand|
   - |VimuxClearRunnerHistory|
+  - VimuxSwitchToRunner
 
 
 Note:
@@ -182,6 +183,20 @@ you enter tmux scroll mode inside the runner pane.
 <
 
 
+------------------------------------------------------------------------------
+                                                          *VimuxSwitchToRunner*
+VimuxSwitchToRunner~
+
+Switch to the runner pane (probably most useful when
+combined with other commands (e.g. rails console)
+>
+ " Switch to the runner pane
+ <Leader>vr :VimuxSwitchToRunner<CR>
+  " open rails console and switch
+  map <Leader>vc :call VimuxRunCommand("clear; bundle exec rails c")<CR>:VimuxSwitchToRunner<CR>
+<
+
+
 ==============================================================================
 MISC (3)                                                             *VimuxMisc*
 
@@ -195,19 +210,19 @@ Full Keybind Example~
 
  " Prompt for a command to run
  map <Leader>rp :VimuxPromptCommand<CR>
- 
+
  " Run last command executed by VimuxRunCommand
  map <Leader>rl :VimuxRunLastCommand<CR>
- 
+
  " Inspect runner pane
  map <Leader>ri :VimuxInspectRunner<CR>
- 
+
  " Close all other tmux panes in current window
  map <Leader>rx :VimuxClosePanes<CR>
- 
+
  " Close vim tmux runner opened by VimuxRunCommand
  map <Leader>rq :VimuxCloseRunner<CR>
- 
+
  " Interrupt any command running in the runner pane
  map <Leader>rs :VimuxInterruptRunner<CR>
 >
